@@ -174,12 +174,12 @@ if build_cuda_ext:
         '-DTHRUST_IGNORE_CUB_VERSION_CHECK'
     ]
 
-    ext_modules.append(
-        cuda_ext_helper('colossal_multihead_attention', [
-            'multihead_attention_1d.cpp', 'kernels/cublas_wrappers.cu', 'kernels/transform_kernels.cu',
-            'kernels/dropout_kernels.cu', 'kernels/normalize_kernels.cu', 'kernels/softmax_kernels.cu',
-            'kernels/general_kernels.cu', 'kernels/cuda_util.cu'
-        ], extra_cuda_flags + cc_flag))
+    # ext_modules.append(
+    #     cuda_ext_helper('colossal_multihead_attention', [
+    #         'multihead_attention_1d.cpp', 'kernels/cublas_wrappers.cu', 'kernels/transform_kernels.cu',
+    #         'kernels/dropout_kernels.cu', 'kernels/normalize_kernels.cu', 'kernels/softmax_kernels.cu',
+    #         'kernels/general_kernels.cu', 'kernels/cuda_util.cu'
+    #     ], extra_cuda_flags + cc_flag))
 
     extra_cxx_flags = ['-std=c++14', '-lcudart', '-lcublas', '-g', '-Wno-reorder', '-fopenmp', '-march=native']
     ext_modules.append(cuda_ext_helper('cpu_adam', ['cpu_adam.cpp'], extra_cuda_flags, extra_cxx_flags))
