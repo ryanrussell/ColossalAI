@@ -106,9 +106,9 @@ if build_cuda_ext:
         TORCH_MAJOR = int(torch.__version__.split('.')[0])
         TORCH_MINOR = int(torch.__version__.split('.')[1])
 
-        if TORCH_MAJOR < 1 or (TORCH_MAJOR == 1 and TORCH_MINOR < 8):
-            raise RuntimeError("Colossal-AI requires Pytorch 1.8 or newer.\n"
-                               "The latest stable release can be obtained from https://pytorch.org/")
+        # if TORCH_MAJOR < 1 or (TORCH_MAJOR == 1 and TORCH_MINOR < 8):
+        #     raise RuntimeError("Colossal-AI requires Pytorch 1.8 or newer.\n"
+        #                        "The latest stable release can be obtained from https://pytorch.org/")
     except ImportError:
         print('torch is not found. CUDA extension will not be installed')
         build_cuda_ext = False
@@ -213,7 +213,7 @@ setup(
     ext_modules=ext_modules,
     cmdclass={'build_ext': BuildExtension} if ext_modules else {},
     install_requires=fetch_requirements('requirements/requirements.txt'),
-    python_requires='>=3.7',
+    # python_requires='>=3.7',
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: Apache Software License',
