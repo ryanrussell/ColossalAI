@@ -15,7 +15,7 @@ from colossalai.core import global_context as gpc
 from colossalai.initialize import launch
 from colossalai.logging import get_dist_logger
 from colossalai.utils import free_port, get_current_device
-from colossalai.testing import rerun_on_exception
+from colossalai.testing import rerun_if_address_is_in_use
 
 BATCH_SIZE = 4
 SEQ_LENGTH = 2
@@ -93,7 +93,7 @@ def run_check(rank, world_size, port):
 
 
 @pytest.mark.dist
-@rerun_on_exception(exception_type=mp.ProcessRaisedException, pattern=".*Address already in use.*")
+@rerun_if_address_is_in_use()
 def test_p2p():
     world_size = 4
     run_func = partial(run_check, world_size=world_size, port=free_port())

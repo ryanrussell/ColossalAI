@@ -15,7 +15,7 @@ from colossalai.initialize import launch
 from colossalai.logging import disable_existing_loggers
 from colossalai.utils import free_port, get_current_device, is_using_pp
 from colossalai.utils.checkpointing import gather_pipeline_parallel_state_dict, load_checkpoint, save_checkpoint
-from colossalai.testing import rerun_on_exception
+from colossalai.testing import rerun_if_address_is_in_use
 
 
 def build_pipeline(model):
@@ -67,7 +67,7 @@ def check_checkpoint_3d(rank, world_size, port):
 
 
 @pytest.mark.dist
-@rerun_on_exception(exception_type=mp.ProcessRaisedException, pattern=".*Address already in use.*")
+@rerun_if_address_is_in_use()
 def test_checkpoint_3d():
     world_size = 8
     run_func = partial(check_checkpoint_3d, world_size=world_size, port=free_port())
