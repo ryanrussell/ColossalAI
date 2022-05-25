@@ -76,5 +76,7 @@ jobs:
           password: ${{ secrets.PRIVATE_PYPI_PASSWD }}
           script: |
             cd $build_dir && ls -la
+          envs: build_dir
+          script_stop: true
         env:
           build_dir: ${{ secrets.PRIVATE_PYPI_NIGHTLY_DIR }}
