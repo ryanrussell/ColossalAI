@@ -75,7 +75,6 @@ jobs:
           username: ${{ secrets.PRIVATE_PYPI_USER }}
           password: ${{ secrets.PRIVATE_PYPI_PASSWD }}
           script: |
-            cd $build_dir
-            find . -type f -mtime +0 -exec rm -f {} +
+            cd $build_dir && ls -la
         env:
           build_dir: ${{ secrets.PRIVATE_PYPI_NIGHTLY_DIR }}
